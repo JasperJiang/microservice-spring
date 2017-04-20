@@ -1,0 +1,18 @@
+server:
+  port: 8761
+
+management:
+  security:
+    enabled: false
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: false
+    fetchRegistry: false
+
+  server:
+    enableSelfPreservation: false
+    response-cache-update-interval-ms: 1000
+    #waitTimeInMsWhenSyncEmpty: 0
