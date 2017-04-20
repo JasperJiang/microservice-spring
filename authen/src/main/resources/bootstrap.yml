@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: authen-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+     
