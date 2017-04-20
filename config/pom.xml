@@ -24,8 +24,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>com.pwc.analyticapps.platform.cloud.config.ConfigApplication</start-class>
 		<java.version>1.8</java.version>
-		<docker.image.prefix>config</docker.image.prefix>
-		<docker.repo>dtr.artifacts-stg.pwc.com</docker.repo>
 	</properties>
 
 	<dependencies>

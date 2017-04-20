@@ -2,14 +2,14 @@ server:
   port: 8888
 
 spring:
-#  cloud:
-#    config:
-#      server:
-#        git:
-#          uri: 
-#          searchPaths: '{application}'
-#          username: 
-#          password: ''
+ cloud:
+   config:
+     server:
+       git:
+         uri: https://github.com/JasperJiang/mircoservice-spring.git
+         searchPaths: 'configurations/{application}'
+         username: JasperJiang
+         password: '{cipher}2a8569ca6f009b24c75571195fe22c81440b6e20436ca00867fda0ebb639cc28'
 
 
 eureka:
