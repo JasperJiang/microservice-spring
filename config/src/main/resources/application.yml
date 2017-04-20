@@ -6,10 +6,10 @@ spring:
 #    config:
 #      server:
 #        git:
-#          uri: https://github.pwc.com/AdvisoryAnalyticApps/AdvisoryAnalyticCloudConfig.git
+#          uri: 
 #          searchPaths: '{application}'
-#          username: luke.r.lu@pwc.com
-#          password: '{cipher}7098314d742fc00055c43089c8bdf84c94025b2706ee6c0b6fe55751f45749167b90142b185990efe4626ab6cb65e77ca62d08505828031bf14e6eea22e77344'
+#          username: 
+#          password: ''
 
 
 eureka:
