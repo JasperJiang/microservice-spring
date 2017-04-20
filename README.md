@@ -1,8 +1,8 @@
-# mircoservice-spring
+# mircoservice-spring 
 
 
-#Authen service
-http://www.baeldung.com/spring-security-oauth-jwt
+# Authen service 
+http://www.baeldung.com/spring-security-oauth-jwt 
 
 keytool -genkeypair -alias mytest 
                     -keyalg RSA 
@@ -11,4 +11,4 @@ keytool -genkeypair -alias mytest
                     -storepass mypass
 
 
-keytool -list -rfc --keystore mytest.jks | openssl x509 -inform pem -pubkey
+keytool -list -rfc --keystore mytest.jks | openssl x509 -inform pem -pubkey 
