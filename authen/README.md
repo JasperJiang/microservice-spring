@@ -9,3 +9,5 @@ When configuring microservice, the spring.application.name should be the same as
 Every time after finish a specific microservice, the docker-compose.yml needs to be updated as well.
 
 Before doing mvn package or mvn deploy, please login to dtr.artifacts-stg.pwc.com at the first place by using 'docker login dtr.artifacts-stg.pwc.com'. Otherwise you cannot build the docker image with plugin successfully.
+
+mypass

@@ -1,6 +1,9 @@
 spring:
-    application:
-        name: test-client
+  application:
+      name: test-client
+
+oauth2:
+  resourceId: test-service
 
 ---
 
