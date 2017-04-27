@@ -18,7 +18,7 @@ import java.util.Collections;
 public class OAuthClientConfig {
 
     @Autowired
-    Properties properties;
+    private Properties properties;
 
     public OAuth2ProtectedResourceDetails oauth2RemoteResource() {
         ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
