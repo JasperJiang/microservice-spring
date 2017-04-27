@@ -1,0 +1,13 @@
+spring:
+  application:
+      name: resource-service
+
+oauth2:
+  resourceId: resource-service
+
+---
+
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888

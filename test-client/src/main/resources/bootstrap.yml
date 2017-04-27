@@ -2,9 +2,17 @@ spring:
   application:
       name: test-client
 
-oauth2:
-  resourceId: test-service
+app:
+  oauth2:
+    accesstokenUrl: http://localhost:9999/oauth/token
+    common:
+      clientId: test-service
+      secret: test123
+      scope: operation
 
+feign:
+  hystrix:
+    enabled: false
 ---
 
 spring:
