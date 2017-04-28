@@ -4,7 +4,7 @@ spring:
 
 app:
   oauth2:
-    accesstokenUrl: http://localhost:9999/oauth/token
+    accesstokenUrl: http://localhost:9999/uaa/oauth/token
     common:
       clientId: test-service
       secret: test123
