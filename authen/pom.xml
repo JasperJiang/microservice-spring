@@ -5,7 +5,7 @@
 
 	<groupId>com.pwc.analyticapps.platform.cloud</groupId>
 	<artifactId>authen</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>Authentication Server</name>
@@ -21,10 +21,8 @@
 	<properties>
 		<spring-cloud-dependencies.version>Camden.SR6</spring-cloud-dependencies.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.pwc.analyticapps.platform.cloud.authen.AuthenApplication</start-class>
 		<java.version>1.8</java.version>
 		<docker.image.prefix>authen</docker.image.prefix>
-		<docker.repo>dtr.artifacts-stg.pwc.com</docker.repo>
 	</properties>
 
 	<dependencies>
@@ -113,13 +111,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
+
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
@@ -127,7 +119,7 @@
 				<configuration>
 					<!-- optionally overwrite tags every time image is built with docker:build -->
 					<forceTags>true</forceTags>
-					<imageName>analyticapp/${docker.image.prefix}</imageName>
+					<imageName>microservice/${docker.image.prefix}</imageName>
 					<dockerDirectory>${basedir}/src/main/docker</dockerDirectory>
 					<resources>
 						<resource>
@@ -147,87 +139,8 @@
 							<goal>build</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>tag-image</id>
-						<phase>package</phase>
-						<goals>
-							<goal>tag</goal>
-						</goals>
-						<configuration>
-							<image>analyticapp/${docker.image.prefix}</image>
-							<newName>${docker.repo}/analyticapp/${docker.image.prefix}</newName>
-							<forceTags>true</forceTags>
-							<!-- optionally overwrite tags every time image is built with docker:build -->
-						</configuration>
-					</execution>
-					<execution>
-						<id>push-image</id>
-						<phase>install</phase>
-						<goals>
-							<goal>push</goal>
-						</goals>
-						<configuration>
-							<imageName>${docker.repo}/analyticapp/${docker.image.prefix}</imageName>
-						</configuration>
-					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/libs-snapshot-local</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/libs-milestone-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-releases</id>
-			<name>Spring Releases</name>
-			<url>https://repo.spring.io/libs-release-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/libs-snapshot-local</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/libs-milestone-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-
-	<distributionManagement>
-		<repository>
-			<id>analytics-commons</id>
-			<url>http://strw099027:9091/repository/analytics-commons</url>
-		</repository>
-		<snapshotRepository>
-			<id>analytics-commons-snapshot</id>
-			<url>http://strw099027:9091/repository/analytics-commons-snapshot</url>
-		</snapshotRepository>
-	</distributionManagement>
 </project>

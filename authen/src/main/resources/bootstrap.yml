@@ -1,11 +1,28 @@
 spring:
   application:
     name: authen-service
+  profiles:
+    active: docker #docker #localhost
+  cloud:
+    config:
+      uri: http://config:8888
+      label: docker
+#      username: admin
+#      password:
+
+
+
+---
+spring:
+  profiles: localhost
   cloud:
     config:
       uri: http://localhost:8888
+      label: master
 
 logging:
   level:
     org.springframework.security: DEBUG
+
+
      

@@ -1,6 +1,12 @@
 server:
   port: 8888
 
+#security:
+#  user:
+#    name: admin
+#    password: '{cipher}17394b56ba78a33815cab58adf19f3587e5c62f189e24337da96154e29e59d86'
+
+
 spring:
  cloud:
    config:
@@ -10,8 +16,21 @@ spring:
          searchPaths: '{application}'
          username: JasperJiang
          password: '{cipher}2a8569ca6f009b24c75571195fe22c81440b6e20436ca00867fda0ebb639cc28'
+ profiles:
+   active: localhost  #docker #localhost
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+  instance:
+     leaseRenewalIntervalInSeconds: 5
+     preferIpAddress: true
+     instanceId: ${spring.application.name}:${server.port}
 
+---
+spring:
+  profiles: localhost
 eureka:
   client:
     serviceUrl:
@@ -19,6 +38,7 @@ eureka:
   instance:
      leaseRenewalIntervalInSeconds: 5
      preferIpAddress: true
-     instanceId: ${random.value}:${spring.application.name}:${server.port}
+     instanceId: ${spring.application.name}:${server.port}
+
 
 
