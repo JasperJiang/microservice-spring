@@ -17,7 +17,7 @@ spring:
          username: JasperJiang
          password: '{cipher}2a8569ca6f009b24c75571195fe22c81440b6e20436ca00867fda0ebb639cc28'
  profiles:
-   active: localhost  #docker #localhost
+   active: docker  #docker #localhost
 
 eureka:
   client:
@@ -26,7 +26,6 @@ eureka:
   instance:
      leaseRenewalIntervalInSeconds: 5
      preferIpAddress: true
-     instanceId: ${spring.application.name}:${server.port}
 
 ---
 spring:
@@ -38,7 +37,6 @@ eureka:
   instance:
      leaseRenewalIntervalInSeconds: 5
      preferIpAddress: true
-     instanceId: ${spring.application.name}:${server.port}
 
 
 

@@ -1,0 +1,128 @@
+version: '3'
+
+#In a swarm env, suggest to use docker stack deploy to get services started
+services:
+  eureka:
+    image: microservice/eureka
+    ports: 
+      - "8761:8761"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    networks: 
+      microservice:
+        aliases:
+          - eurekaservice
+    healthcheck:
+      test: "exit 0"
+
+  config:
+    image: microservice/config
+    ports: 
+      - "8888:8888"
+    depends_on: 
+      - eureka
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    networks: 
+      microservice:
+        aliases:
+          - configservice
+    healthcheck:
+      test: "exit 0"
+
+  apigateway:
+    image: microservice/api-gateway
+    ports: 
+      - "9999:9999"
+    depends_on: 
+      - eureka
+      - config
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 2
+        delay: 60s
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+        max_attempts: 5
+        window: 60s
+    networks: 
+      microservice:
+        aliases:
+          - apigateway
+    healthcheck:
+      test: "exit 0"
+
+  authen:
+    image: microservice/authen
+    depends_on: 
+      - eureka
+      - config
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 2
+        delay: 60s
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+        max_attempts: 5
+        window: 60s
+    networks: 
+      - microservice
+    healthcheck:
+      test: "exit 0"
+
+  resourceservice:
+    image: microservice/resource-service
+    depends_on: 
+      - eureka
+      - config
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 60s
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+        max_attempts: 5
+        window: 60s
+    networks: 
+      - microservice
+    healthcheck:
+      test: "exit 0"
+
+  testclient:
+    image: microservice/test-client
+    depends_on: 
+      - eureka
+      - config
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 60s
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+        max_attempts: 5
+        window: 60s
+    networks: 
+      - microservice
+    healthcheck:
+      test: "exit 0"
+
+      
+networks:
+  microservice: 

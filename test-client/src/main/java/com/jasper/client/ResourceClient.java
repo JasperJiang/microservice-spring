@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Created by jjiang153 on 2017/4/27.
  */
-@FeignClient(value = "resource-service", url = "http://localhost:9999/resource-service")
+@FeignClient(value = "resource-service", url = "http://apigateway:9999/resource-service")
 public interface ResourceClient {
     @RequestMapping(value = "index",method = RequestMethod.GET)
     String index();

@@ -1,14 +1,22 @@
 spring:
   application:
       name: test-client
+  profiles:
+    active: docker #docker #localhost
+  cloud:
+    config:
+      uri: http://config:8888
+      label: docker
 
-app:
-  oauth2:
-    accesstokenUrl: http://localhost:9999/uaa/oauth/token
-    common:
-      clientId: test-service
-      secret: test123
-      scope: operation
+#
+#app:
+#  oauth2:
+#    accesstokenUrl: http://localhost:9999/uaa/oauth/token
+#    common:
+#      clientId: test-service
+#      secret: test123
+#      scope: operation
+
 
 feign:
   hystrix:
@@ -16,6 +24,8 @@ feign:
 ---
 
 spring:
+  profiles: localhost
   cloud:
     config:
       uri: http://localhost:8888
+      label: master

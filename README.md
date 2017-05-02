@@ -20,3 +20,40 @@ configure(HttpSecurity) allows configuration of web based security at a resource
 configure(WebSecurity) is used for configuration settings that impact global security (ingore resources, set debug mode, reject requests by implementing a custom firewall definition). For example, the following method would cause any request that starts with /resources/ to be ignored for authentication purposes
 
 
+#Run
+***1. Build docker images***  
+```
+mvn clean install -DskipTests
+```
+
+***2. Create docker swarm manager***  
+```
+docker swarm init --advertise-addr xx.xx.xxx.x
+```
+vi docker-swarm.token file and save the token to root's home directory 
+***3. List all node on this swarm***  
+```
+docker node ls 
+```
+***4. Join docker swarm***  
+***5. Create portainer Manager UI***  
+```
+docker service create \
+    --name portainer \
+    --publish 9000:9000 \
+    --constraint 'node.role == manager' \
+    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+    portainer/portainer \
+    -H unix:///var/run/docker.sock
+```
+
+***6. Start service by docker-compose.yml***  
+```
+docker stack deploy -c docker-compose.yml miroservice-service --with-registry-auth
+```
+
+#Stop  
+```
+docker stack down miroservice-service
+```
+

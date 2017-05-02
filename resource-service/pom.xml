@@ -5,7 +5,7 @@
 
 	<groupId>com.jasper</groupId>
 	<artifactId>resource-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>Resource-Service</name>
@@ -19,6 +19,7 @@
 	</parent>
 
 	<properties>
+		<docker.image.prefix>resource-service</docker.image.prefix>
         <spring-cloud-dependencies.version>Camden.SR6</spring-cloud-dependencies.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -99,6 +100,36 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<configuration>
+					<!-- optionally overwrite tags every time image is built with docker:build -->
+					<forceTags>true</forceTags>
+					<imageName>microservice/${docker.image.prefix}</imageName>
+					<dockerDirectory>${basedir}/src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<!-- make sure that you set ~/.docker/config.json for JFrog username
+						and password -->
+					<useConfigFile>true</useConfigFile>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
