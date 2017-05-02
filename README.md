@@ -31,11 +31,11 @@ mvn clean install -DskipTests
 docker swarm init --advertise-addr xx.xx.xxx.x
 ```
 vi docker-swarm.token file and save the token to root's home directory 
-***3. List all node on this swarm***  
+***3. Join docker swarm***  
+***4. List all node on this swarm***  
 ```
 docker node ls 
 ```
-***4. Join docker swarm***  
 ***5. Create portainer Manager UI***  
 ```
 docker service create \
