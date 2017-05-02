@@ -20,7 +20,7 @@ configure(HttpSecurity) allows configuration of web based security at a resource
 configure(WebSecurity) is used for configuration settings that impact global security (ingore resources, set debug mode, reject requests by implementing a custom firewall definition). For example, the following method would cause any request that starts with /resources/ to be ignored for authentication purposes
 
 
-#Run
+#Run  
 ***1. Build docker images***  
 ```
 mvn clean install -DskipTests
